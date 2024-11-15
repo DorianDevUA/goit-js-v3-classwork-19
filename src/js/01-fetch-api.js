@@ -54,5 +54,14 @@ const options = {
 };
 
 fetch(url, options)
-  .then(r => r.json())
-  .then(console.log);
+  .then(r => {
+    if (!r.ok) {
+      throw new Error(r.status);
+    }
+    console.log(r);
+    return r.json();
+  })
+  .then(console.log)
+  .catch(error => {
+    console.log(error);
+  });
